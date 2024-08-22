@@ -1,5 +1,5 @@
 mod basic;
-
-const DEFAULT_PARTITION_COUNT: usize = 10000000;
+mod newton_cotes;
 
 pub use basic::*;
+pub use newton_cotes::*;
