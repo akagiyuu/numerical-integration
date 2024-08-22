@@ -1,7 +1,16 @@
 [package]
 name = "numerical-integration"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
+license = "GPL-2.0"
+readme = "README.md"
+repository = "https://github.com/akagiyuu/numerical-integration"
+homepage = "https://github.com/akagiyuu/numerical-integration"
+description = """
+A library for evaluating integrals using numerical methods
+"""
+categories = ["mathematics"]
+keywords = ["integral", "integration", "numerical"]
 
 [dependencies]
 itertools = "0.13.0"
