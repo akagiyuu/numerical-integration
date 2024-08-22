@@ -1,5 +1,5 @@
 [package]
-name = "numerical-integration"
+name = "numerical-integral"
 version = "1.0.0"
 edition = "2021"
 license = "GPL-2.0"
