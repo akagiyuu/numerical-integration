@@ -1,7 +1,5 @@
 use rayon::iter::{ParallelBridge, ParallelIterator};
 
-use crate::DEFAULT_PARTITION_COUNT;
-
 #[allow(clippy::redundant_closure)]
 fn _left_end_point(a: f64, b: f64, f: impl Fn(f64) -> f64 + Sync) -> impl Fn(usize) -> f64 {
     move |n| {
@@ -21,10 +19,15 @@ fn _left_end_point(a: f64, b: f64, f: impl Fn(f64) -> f64 + Sync) -> impl Fn(usi
     }
 }
 
-pub fn left_end_point(a: f64, b: f64, f: impl Fn(f64) -> f64 + Sync) -> f64 {
+pub fn left_end_point(
+    a: f64,
+    b: f64,
+    f: impl Fn(f64) -> f64 + Sync,
+    partition_count: usize,
+) -> f64 {
     let approximation_f = _left_end_point(a, b, f);
 
-    approximation_f(DEFAULT_PARTITION_COUNT)
+    approximation_f(partition_count)
 }
 
 #[allow(clippy::redundant_closure)]
@@ -46,8 +49,13 @@ fn _right_end_point(a: f64, b: f64, f: impl Fn(f64) -> f64 + Sync) -> impl Fn(us
     }
 }
 
-pub fn right_end_point(a: f64, b: f64, f: impl Fn(f64) -> f64 + Sync) -> f64 {
+pub fn right_end_point(
+    a: f64,
+    b: f64,
+    f: impl Fn(f64) -> f64 + Sync,
+    partition_count: usize,
+) -> f64 {
     let approximation_f = _left_end_point(a, b, f);
 
-    approximation_f(DEFAULT_PARTITION_COUNT)
+    approximation_f(partition_count)
 }
