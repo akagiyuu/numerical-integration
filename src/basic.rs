@@ -1,7 +1,11 @@
 use rayon::iter::{ParallelBridge, ParallelIterator};
 
 #[allow(clippy::redundant_closure)]
-fn _left_end_point(a: f64, b: f64, f: impl Fn(f64) -> f64 + Sync) -> impl Fn(usize) -> f64 {
+fn _left_end_point(
+    a: f64,
+    b: f64,
+    f: impl Fn(f64) -> f64 + Send + Sync + Copy,
+) -> impl Fn(usize) -> f64 {
     move |n| {
         assert!(n > 0);
 
@@ -22,7 +26,7 @@ fn _left_end_point(a: f64, b: f64, f: impl Fn(f64) -> f64 + Sync) -> impl Fn(usi
 pub fn left_end_point(
     a: f64,
     b: f64,
-    f: impl Fn(f64) -> f64 + Sync,
+    f: impl Fn(f64) -> f64 + Send + Sync + Copy,
     partition_count: usize,
 ) -> f64 {
     let approximation_f = _left_end_point(a, b, f);
@@ -31,7 +35,11 @@ pub fn left_end_point(
 }
 
 #[allow(clippy::redundant_closure)]
-fn _right_end_point(a: f64, b: f64, f: impl Fn(f64) -> f64 + Sync) -> impl Fn(usize) -> f64 {
+fn _right_end_point(
+    a: f64,
+    b: f64,
+    f: impl Fn(f64) -> f64 + Send + Sync + Copy,
+) -> impl Fn(usize) -> f64 {
     move |n| {
         assert!(n > 0);
 
@@ -52,7 +60,7 @@ fn _right_end_point(a: f64, b: f64, f: impl Fn(f64) -> f64 + Sync) -> impl Fn(us
 pub fn right_end_point(
     a: f64,
     b: f64,
-    f: impl Fn(f64) -> f64 + Sync,
+    f: impl Fn(f64) -> f64 + Send + Sync + Copy,
     partition_count: usize,
 ) -> f64 {
     let approximation_f = _left_end_point(a, b, f);
